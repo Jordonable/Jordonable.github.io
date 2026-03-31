@@ -1,0 +1,270 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>236.二叉树的最近公共祖先 | 编码初探</title><meta name="author" content="Jordan"><meta name="copyright" content="Jordan"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="题解123456789101112class Solution &#123;    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) &#123;        if (root &#x3D;&#x3D; null || root &#x3D;&#x3D; q || root &#x3D;&#x3D; p) &#123;            retur">
+<meta property="og:type" content="article">
+<meta property="og:title" content="236.二叉树的最近公共祖先">
+<meta property="og:url" content="http://example.com/2026/03/31/236.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/index.html">
+<meta property="og:site_name" content="编码初探">
+<meta property="og:description" content="题解123456789101112class Solution &#123;    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) &#123;        if (root &#x3D;&#x3D; null || root &#x3D;&#x3D; q || root &#x3D;&#x3D; p) &#123;            retur">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2026-03-31T08:27:17.000Z">
+<meta property="article:modified_time" content="2026-03-31T08:27:17.000Z">
+<meta property="article:author" content="Jordan">
+<meta property="article:tag" content="LeetCode">
+<meta property="article:tag" content="二叉树">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "236.二叉树的最近公共祖先",
+  "url": "http://example.com/2026/03/31/236.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2026-03-31T08:27:17.000Z",
+  "dateModified": "2026-03-31T08:27:17.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Jordan",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2026/03/31/236.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '236.二叉树的最近公共祖先',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">编码初探</span></a><a class="nav-page-title" href="/"><span class="site-name">236.二叉树的最近公共祖先</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">236.二叉树的最近公共祖先</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-03-31T08:27:17.000Z" title="Created 2026-03-31 16:27:17">2026-03-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-03-31T08:27:17.000Z" title="Updated 2026-03-31 16:27:17">2026-03-31</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><!--
+AI 协作提示词
+
+你是我的 Hexo 写作助手。请基于这篇文章的标题、提纲或草稿，完成下面任务：
+1. 优化文章结构，让层次更清晰；
+2. 补写正文，但不要编造我没有提供的事实；
+3. 给出更合适的 tags、categories 和 description；
+4. 保持 Hexo Front-matter 结构不变；
+5. 输出为可直接发布的 Markdown。
+-->
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> TreeNode <span class="title function_">lowestCommonAncestor</span><span class="params">(TreeNode root, TreeNode p, TreeNode q)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">null</span> || root == q || root == p) &#123;</span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">left</span> <span class="operator">=</span> lowestCommonAncestor(root.left, p, q);</span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">right</span> <span class="operator">=</span> lowestCommonAncestor(root.right, p, q);</span><br><span class="line">        <span class="keyword">if</span> (left != <span class="literal">null</span> &amp;&amp; right != <span class="literal">null</span>)</span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        <span class="keyword">return</span> left != <span class="literal">null</span> ? left : right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
+<li>利用递归回溯时，信息只能从下往上汇聚来找信息交汇处.</li>
+<li>思路是p,q失踪了,全员寻找,如果有该节点的孩子回复不是null,此节点就说我的左&#x2F;右孩子知道他的信息,如果他父亲开始问了,就报告给他的父亲.层层上报直到有一个节点知道它左右孩子都有信息.</li>
+<li>这题里“后序”不是为了遍历顺序，而是为了“决策时机”</li>
+</ul>
+<ol>
+<li>左边先汇报</li>
+<li>右边再汇报</li>
+<li>当前节点根据两份汇报做决定<br>这就是后序。</li>
+</ol>
+<p>真难吧,想不到.</p>
+<h2 id="1-什么时候用前序"><a href="#1-什么时候用前序" class="headerlink" title="1. 什么时候用前序"></a>1. 什么时候用前序</h2><p><strong>当前节点要先做事，再把影响传给孩子。</strong></p>
+<p>关键词：</p>
+<ul>
+<li>先访问自己</li>
+<li>父亲给孩子传信息</li>
+<li>路径、深度、前缀和、状态下传</li>
+<li>建树、复制树、序列化</li>
+</ul>
+<p>你可以记成：</p>
+<p>前序 &#x3D; 自上而下</p>
+<p>典型题：</p>
+<ul>
+<li>路径总和</li>
+<li>前缀和 + 回溯</li>
+<li>二叉树展开为链表的栈版</li>
+<li>记录从根到当前路径</li>
+</ul>
+<p>一句判断法：</p>
+<p>如果孩子要用到我现在的信息，就前序。</p>
+<hr>
+<h2 id="2-什么时候用中序"><a href="#2-什么时候用中序" class="headerlink" title="2. 什么时候用中序"></a>2. 什么时候用中序</h2><p><strong>只有当“左-中-右”这个顺序本身有意义时。</strong></p>
+<p>最常见就是 BST。</p>
+<p>因为 BST 的中序遍历结果是：</p>
+<p>从小到大</p>
+<p>你可以记成：</p>
+<p>中序 &#x3D; 排序 &#x2F; BST 专用感最强</p>
+<p>典型题：</p>
+<ul>
+<li>验证二叉搜索树</li>
+<li>二叉搜索树第 k 小</li>
+<li>把 BST 转成有序数组</li>
+</ul>
+<p>一句判断法：</p>
+<p>如果题目和 BST 的有序性有关，优先想中序。</p>
+<p>补一句很重要的话：</p>
+<p>普通二叉树里，中序通常没前序和后序常用。</p>
+<hr>
+<h2 id="3-什么时候用后序"><a href="#3-什么时候用后序" class="headerlink" title="3. 什么时候用后序"></a>3. 什么时候用后序</h2><p><strong>我要先拿到左右子树的结果，再决定当前节点怎么办。</strong></p>
+<p>关键词：</p>
+<ul>
+<li>先问孩子</li>
+<li>再汇总自己</li>
+<li>高度、深度、平衡</li>
+<li>最近公共祖先</li>
+<li>子树信息汇总</li>
+</ul>
+<p>你可以记成：</p>
+<p>后序 &#x3D; 自下而上</p>
+<p>典型题：</p>
+<ul>
+<li>二叉树最大深度</li>
+<li>平衡二叉树</li>
+<li>最近公共祖先</li>
+<li>直径</li>
+<li>路径和的一些“子树汇总”题</li>
+</ul>
+<p>一句判断法：</p>
+<p>如果当前节点的答案依赖左右孩子的答案，就后序。</p>
+<hr>
+<h2 id="一眼判断口诀"><a href="#一眼判断口诀" class="headerlink" title="一眼判断口诀"></a>一眼判断口诀</h2><p>你就背这个：</p>
+<ul>
+<li><strong>信息往下传</strong>：前序</li>
+<li><strong>利用 BST 有序性</strong>：中序</li>
+<li><strong>信息往上收</strong>：后序</li>
+</ul>
+<hr>
+<h2 id="你最近做过的题，对应起来就是"><a href="#你最近做过的题，对应起来就是" class="headerlink" title="你最近做过的题，对应起来就是"></a>你最近做过的题，对应起来就是</h2><ul>
+<li>Path Sum III 前缀和：前序进入节点记账，后序离开节点回溯擦掉</li>
+<li>Lowest Common Ancestor：后序，因为必须先知道左右子树找到了什么</li>
+<li>Flatten Binary Tree：<ul>
+<li>用数组存前序顺序再重连：本质是前序</li>
+<li>用“返回尾巴”原地拼接：本质是后序</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="最实用的判断方式"><a href="#最实用的判断方式" class="headerlink" title="最实用的判断方式"></a>最实用的判断方式</h2><p>做树题先问 2 个问题：</p>
+<ol>
+<li><p>当前节点要不要立刻处理？<br> 要，就想前序。</p>
+</li>
+<li><p>我是不是必须先知道左右子树的结果？<br> 是，就想后序。</p>
+</li>
+</ol>
+<p>如果题目又提到 BST、升序、前驱后继、k 小，优先想中序。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">Jordan</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2026/03/31/236.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/">http://example.com/2026/03/31/236.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">二叉树</a><a class="post-meta__tags" href="/tags/LeetCode/">LeetCode</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/03/31/%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F%E4%B8%8E%E8%85%90%E7%83%82%E7%9A%84%E6%A9%98%E5%AD%90/" title="岛屿数量与腐烂的橘子"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">岛屿数量与腐烂的橘子</div></div><div class="info-2"><div class="info-item-1">前言这两道题是图遍历算法的经典代表,分别展示了 DFS 和 BFS 的典型应用场景。第一次做确实需要时间理解,但掌握后就是标准模板了。 母题模型识别凡是下面这些题,第一反应都可以是 DFS&#x2F;BFS:  岛屿数量 最大岛屿面积 被围绕的区域 图像渲染 单词搜索 连通块统计  共同点: 从一个起点出发,把一整片相连区域全部扩散访问掉。 题解1234567891011121314151617181920212223242526272829303132class Solution &#123;    public int numIslands(char[][] grid) &#123;        int count = 0;        // 1. 直升机扫射全图        for (int i = 0; i &lt; grid.length; i++) &#123;            for (int j = 0; j &lt; grid[0].length; j++) &#123;                // 2. 发现陆地！             ...</div></div></div></a><a class="pagination-related" href="/2026/03/30/%E5%89%8D%E7%BC%80%E5%92%8C--%E6%97%A7%E4%B8%8E%E6%96%B0/" title="前缀和--旧与新"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">前缀和--旧与新</div></div><div class="info-2"><div class="info-item-1">前缀和是一种经典的算法技巧,通过预处理累加和来优化区间查询。本文通过两道 LeetCode 题目,展示前缀和在数组和树结构中的应用。   问题一: 和为 K 的子数组LeetCode 560. 和为 K 的子数组 给定一个整数数组和一个整数 k,找到该数组中和为 k 的连续子数组的个数。 解题思路使用前缀和 + 哈希表的方式:  用 HashMap 存储前缀和出现的次数 遍历数组时,如果 当前前缀和 - k 在 map 中存在,说明存在和为 k 的子数组 核心公式: prefixSum[j] - prefixSum[i] = k 等价于 prefixSum[i] = prefixSum[j] - k  代码实现1234567891011121314151617class Solution &#123;    public int subarraySum(int[] nums, int k) &#123;        int prefixSum = 0;        int count = 0;        HashMap&lt;Integer, Integer&gt; ma...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/03/30/%E5%89%8D%E7%BC%80%E5%92%8C--%E6%97%A7%E4%B8%8E%E6%96%B0/" title="前缀和--旧与新"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-30</div><div class="info-item-2">前缀和--旧与新</div></div><div class="info-2"><div class="info-item-1">前缀和是一种经典的算法技巧,通过预处理累加和来优化区间查询。本文通过两道 LeetCode 题目,展示前缀和在数组和树结构中的应用。   问题一: 和为 K 的子数组LeetCode 560. 和为 K 的子数组 给定一个整数数组和一个整数 k,找到该数组中和为 k 的连续子数组的个数。 解题思路使用前缀和 + 哈希表的方式:  用 HashMap 存储前缀和出现的次数 遍历数组时,如果 当前前缀和 - k 在 map 中存在,说明存在和为 k 的子数组 核心公式: prefixSum[j] - prefixSum[i] = k 等价于 prefixSum[i] = prefixSum[j] - k  代码实现1234567891011121314151617class Solution &#123;    public int subarraySum(int[] nums, int k) &#123;        int prefixSum = 0;        int count = 0;        HashMap&lt;Integer, Integer&gt; ma...</div></div></div></a><a class="pagination-related" href="/2026/03/30/%5B105%5D%20%E4%BB%8E%E5%89%8D%E5%BA%8F%E4%B8%8E%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91/" title="[105] 从前序与中序遍历序列构造二叉树"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-30</div><div class="info-item-2">[105] 从前序与中序遍历序列构造二叉树</div></div><div class="info-2"><div class="info-item-1">核心思路利用前序和中序遍历的特性还原二叉树：  前序遍历第一个元素是根节点 在中序遍历中找到根节点位置，可以分割左右子树 递归构建左右子树  关键洞察：前序确定根，中序确定边界。 代码实现1234567891011121314151617181920212223242526272829class Solution &#123;    private Map&lt;Integer, Integer&gt; index = new HashMap&lt;&gt;();    public TreeNode buildTree(int[] preorder, int[] inorder) &#123;        // 1. 把中序遍历的值和索引存入小抄        for (int i = 0; i &lt; inorder.length; i++) &#123;            index.put(inorder[i], i);        &#125;        // 2. 开始建树！初始状态下，前后序的可用范围都是整个数组        int n = preo...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Jordan</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">题解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">2.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E7%94%A8%E5%89%8D%E5%BA%8F"><span class="toc-number">3.</span> <span class="toc-text">1. 什么时候用前序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E7%94%A8%E4%B8%AD%E5%BA%8F"><span class="toc-number">4.</span> <span class="toc-text">2. 什么时候用中序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E7%94%A8%E5%90%8E%E5%BA%8F"><span class="toc-number">5.</span> <span class="toc-text">3. 什么时候用后序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E7%9C%BC%E5%88%A4%E6%96%AD%E5%8F%A3%E8%AF%80"><span class="toc-number">6.</span> <span class="toc-text">一眼判断口诀</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%A0%E6%9C%80%E8%BF%91%E5%81%9A%E8%BF%87%E7%9A%84%E9%A2%98%EF%BC%8C%E5%AF%B9%E5%BA%94%E8%B5%B7%E6%9D%A5%E5%B0%B1%E6%98%AF"><span class="toc-number">7.</span> <span class="toc-text">你最近做过的题，对应起来就是</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%AE%9E%E7%94%A8%E7%9A%84%E5%88%A4%E6%96%AD%E6%96%B9%E5%BC%8F"><span class="toc-number">8.</span> <span class="toc-text">最实用的判断方式</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/31/%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F%E4%B8%8E%E8%85%90%E7%83%82%E7%9A%84%E6%A9%98%E5%AD%90/" title="岛屿数量与腐烂的橘子">岛屿数量与腐烂的橘子</a><time datetime="2026-03-31T11:37:40.000Z" title="Created 2026-03-31 19:37:40">2026-03-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/31/236.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/" title="236.二叉树的最近公共祖先">236.二叉树的最近公共祖先</a><time datetime="2026-03-31T08:27:17.000Z" title="Created 2026-03-31 16:27:17">2026-03-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/30/%E5%89%8D%E7%BC%80%E5%92%8C--%E6%97%A7%E4%B8%8E%E6%96%B0/" title="前缀和--旧与新">前缀和--旧与新</a><time datetime="2026-03-30T04:20:28.000Z" title="Created 2026-03-30 12:20:28">2026-03-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/30/%5B105%5D%20%E4%BB%8E%E5%89%8D%E5%BA%8F%E4%B8%8E%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91/" title="[105] 从前序与中序遍历序列构造二叉树">[105] 从前序与中序遍历序列构造二叉树</a><time datetime="2026-03-30T03:09:02.000Z" title="Created 2026-03-30 11:09:02">2026-03-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/29/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%95%E5%BC%80%E4%B8%BA%E9%93%BE%E8%A1%A8/" title="二叉树展开为链表">二叉树展开为链表</a><time datetime="2026-03-29T11:30:11.000Z" title="Created 2026-03-29 19:30:11">2026-03-29</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Jordan</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
